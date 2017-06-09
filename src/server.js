@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDom from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import routes from './routes';
-import App from './components/App';
+import { Provider } from 'react-redux';
+import configureStore from './redux/configureStore';
 
 const app = express();
 
@@ -13,10 +14,13 @@ app.get(/^\/.*/, (req, res) => {
   if (context.url) {
     res.redirect(context.status, context.url);
   } else {
+    const store = configureStore();
     const componentHTML = ReactDom.renderToString(
-      <StaticRouter location={req.url} context={context}>
-        {routes}
-      </StaticRouter>
+      <Provider store={store}>
+        <StaticRouter location={req.url} context={context}>
+          {routes}
+        </StaticRouter>
+      </Provider>
     );
     res.end(renderHTML(componentHTML));
   } 
