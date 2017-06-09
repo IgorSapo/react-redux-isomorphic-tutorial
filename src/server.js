@@ -1,13 +1,25 @@
 import express from 'express';
 import React from 'react';
 import ReactDom from 'react-dom/server';
-import App from 'components/App';
+import { StaticRouter } from 'react-router';
+import routes from './routes';
+import App from './components/App';
 
 const app = express();
 
-app.use((req, res) => {
-	const componentHTML = ReactDom.renderToString(<App />);
-	return res.end(renderHTML(componentHTML));
+app.get(/^\/.*/, (req, res) => {
+  const context = {};
+
+  if (context.url) {
+    res.redirect(context.status, context.url);
+  } else {
+    const componentHTML = ReactDom.renderToString(
+      <StaticRouter location={req.url} context={context}>
+        {routes}
+      </StaticRouter>
+    );
+    res.end(renderHTML(componentHTML));
+  } 
 });
 
 const assetUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:8050' : '';
@@ -27,11 +39,11 @@ function renderHTML(componentHTML) {
         <script type="application/javascript" src="${assetUrl}/public/assets/bundle.js"></script>
       </body>
     </html>
-  `
+  `;
 }
 
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-	console.log(`Server listening on: ${PORT}`);
+  console.log(`Server listening on: ${PORT}`);
 });

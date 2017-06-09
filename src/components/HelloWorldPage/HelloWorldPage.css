@@ -2,8 +2,8 @@
   padding: 20px
 }
 
-.App h1 {
-  font-size: 26px
+.App p {
+  color: green;
 }
 
 .App input {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './App.css';
+import './HelloWorldPage.css';
 
-class App extends Component {
+class HelloWorldPage extends Component {
   constructor(props) {
     super(props);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -57,12 +57,12 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+HelloWorldPage.propTypes = {
   initialName: PropTypes.string
 };
 
-App.defaultProps = {
+HelloWorldPage.defaultProps = {
   initialName: 'Anonimous'
 };
 
-export default App;
+export default HelloWorldPage;

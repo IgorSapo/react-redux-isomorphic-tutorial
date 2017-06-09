@@ -77,10 +77,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         use: process.env.NODE_ENV !== 'production' ?
-               ['react-hot-loader', 'babel-loader', 'eslint-loader'] :
+               ['react-hot-loader', 'babel-loader'] :
                'babel-loader',
-        exclude: [/node_modules/, /public/],
-        //include: path.join(__dirname, 'src')
+        exclude: [/node_modules/, /public/]
+        // include: path.join(__dirname, 'src')
       }
     ]
   },
