@@ -1,0 +1,1 @@
+export const isUserSignedIn = state => state.auth.getIn(['user', 'isSignedIn']);

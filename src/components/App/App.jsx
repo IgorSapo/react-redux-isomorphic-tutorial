@@ -4,9 +4,11 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Nav from 'react-bootstrap/lib/Nav';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import LinkContainer from 'react-router-bootstrap/lib/LinkContainer';
 import './bootstrap.css';
+import { connect } from 'react-redux';
+import { isUserSignedIn } from 'redux/models/user';
 
 
 class App extends Component {
@@ -22,9 +24,12 @@ class App extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav navbar>
-              <LinkContainer to='/time'>
-                <NavItem>Time</NavItem>
-              </LinkContainer>
+              {this.props.userSignedIn ?
+                (<LinkContainer to='/time'>
+                  <NavItem>Time</NavItem>
+                </LinkContainer>) : 
+                null
+              }
               <LinkContainer to='/counters'>
                 <NavItem>Counters</NavItem>
               </LinkContainer>
@@ -41,7 +46,13 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  userSignedIn: PropTypes.bool.isRequired
 };
 
-export default App;
+const mapStateToProps = state => ({
+  userSignedIn: isUserSignedIn(state)
+})
+
+export default withRouter(connect(mapStateToProps)(App));
+// export default App;
