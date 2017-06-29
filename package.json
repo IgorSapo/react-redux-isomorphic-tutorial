@@ -1,7 +1,7 @@
 {
   "name": "habr-app",
   "version": "1.0.0",
-  "description": "Learning rect redux",
+  "description": "Learning react redux",
   "main": "index.js",
   "scripts": {
     "test": "test",
@@ -9,10 +9,14 @@
     "webpack-devserver": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 8050 --host 0.0.0.0",
     "nodemon": "set NODE_PATH=./src; && nodemon server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IgorSapo/react-redux-isomorphic-tutorial.git"
+  },
   "keywords": [
     "reat",
     "redux",
-    "lerning\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Da\u001b[2~r\u001b[2~ning"
+    "learning"
   ],
   "author": "IgorSapo",
   "license": "ISC",
